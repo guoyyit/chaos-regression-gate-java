@@ -1,0 +1,11 @@
+{
+  "name": "fault-dep-outoforder",
+  "seed": 10,
+  "requests": [
+    {"id": "create-1", "method": "POST", "path": "/api/resources", "body": {"data": {"v": 1}}},
+    {"id": "create-2", "method": "POST", "path": "/api/resources", "body": {"data": {"v": 2}}}
+  ],
+  "faults": [
+    {"id": "f1", "type": "OUT_OF_ORDER", "boundary": "DEPENDENCY", "request": "create-1", "after": "create-2"}
+  ]
+}

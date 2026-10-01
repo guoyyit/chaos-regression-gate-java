@@ -1,0 +1,761 @@
+{
+  "verdict" : "FAIL",
+  "total" : 12,
+  "passed" : 11,
+  "regressions" : 0,
+  "fluctuations" : 0,
+  "expectedChanges" : 0,
+  "stableFailures" : 1,
+  "flakyFailures" : 0,
+  "scenarios" : [ {
+    "name" : "basic-crud",
+    "verdict" : "STABLE_FAILURE",
+    "runResult" : {
+      "success" : false,
+      "failureReason" : "IllegalStateException: failed to launch service for scenario in /home/yangyang/repos/chaos-regression-gate-java-gen/chaos-regression-gate-java-gen-b/gate/reports/runs/basic-crud/stability-0",
+      "trace" : null,
+      "durationMs" : 0
+    },
+    "comparison" : null,
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "fault-connreset",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "fault-connreset",
+        "seed" : 3,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CONNECTION_FAILURE",
+            "resourceId" : null,
+            "version" : null,
+            "replayed" : false
+          } ],
+          "faults" : [ "CONNECTION_RESET:CLIENT" ],
+          "dependencyEvents" : [ ]
+        }, {
+          "id" : "read-1",
+          "method" : "GET",
+          "path" : "/api/resources/r-1",
+          "wave" : 1,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "NOT_FOUND",
+            "resourceId" : null,
+            "version" : null,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "fault-dep-duplicate",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "fault-dep-duplicate",
+        "seed" : 9,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CREATED",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-1",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "order" : 1
+          } ]
+        }, {
+          "id" : "update-1",
+          "method" : "POST",
+          "path" : "/api/resources/r-1/update",
+          "wave" : 1,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 2,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-2",
+            "resourceId" : "r-1",
+            "version" : 2,
+            "order" : 2
+          }, {
+            "eventId" : "evt-2",
+            "resourceId" : "r-1",
+            "version" : 2,
+            "order" : 3
+          } ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "fault-dep-latency",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "fault-dep-latency",
+        "seed" : 8,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CREATED",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-1",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "order" : 1
+          } ]
+        }, {
+          "id" : "update-1",
+          "method" : "POST",
+          "path" : "/api/resources/r-1/update",
+          "wave" : 1,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 2,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-2",
+            "resourceId" : "r-1",
+            "version" : 2,
+            "order" : 2
+          } ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "fault-dep-outoforder",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "fault-dep-outoforder",
+        "seed" : 10,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CREATED",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-2",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "order" : 2
+          } ]
+        }, {
+          "id" : "create-2",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CREATED",
+            "resourceId" : "r-2",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-1",
+            "resourceId" : "r-2",
+            "version" : 1,
+            "order" : 1
+          } ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "fault-duplicate",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "fault-duplicate",
+        "seed" : 4,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CREATED",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          }, {
+            "attempt" : 2,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : true
+          } ],
+          "faults" : [ "DUPLICATE_DELIVERY:CLIENT" ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-1",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "order" : 1
+          }, {
+            "eventId" : "evt-1",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "order" : 1
+          } ]
+        }, {
+          "id" : "read-1",
+          "method" : "GET",
+          "path" : "/api/resources/r-1",
+          "wave" : 1,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "fault-failmidway",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "fault-failmidway",
+        "seed" : 6,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CREATED",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-1",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "order" : 1
+          } ]
+        }, {
+          "id" : "update-1",
+          "method" : "POST",
+          "path" : "/api/resources/r-1/update",
+          "wave" : 1,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "DEPENDENCY_FAILURE",
+            "resourceId" : "r-1",
+            "version" : 2,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        }, {
+          "id" : "read-1",
+          "method" : "GET",
+          "path" : "/api/resources/r-1",
+          "wave" : 2,
+          "dispatchIndex" : 2,
+          "completionIndex" : 2,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 2,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "fault-latency",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "fault-latency",
+        "seed" : 1,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CREATED",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ "LATENCY:CLIENT" ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-1",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "order" : 1
+          } ]
+        }, {
+          "id" : "read-1",
+          "method" : "GET",
+          "path" : "/api/resources/r-1",
+          "wave" : 1,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "fault-outoforder",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "fault-outoforder",
+        "seed" : 5,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CREATED",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-1",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "order" : 1
+          } ]
+        }, {
+          "id" : "read-before",
+          "method" : "GET",
+          "path" : "/api/resources/r-1",
+          "wave" : 1,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        }, {
+          "id" : "update-1",
+          "method" : "POST",
+          "path" : "/api/resources/r-1/update",
+          "wave" : 2,
+          "dispatchIndex" : 2,
+          "completionIndex" : 2,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 2,
+            "replayed" : false
+          } ],
+          "faults" : [ "OUT_OF_ORDER:CLIENT" ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-2",
+            "resourceId" : "r-1",
+            "version" : 2,
+            "order" : 2
+          } ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "fault-timeout",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "fault-timeout",
+        "seed" : 2,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "TIMEOUT",
+            "resourceId" : null,
+            "version" : null,
+            "replayed" : false
+          } ],
+          "faults" : [ "TIMEOUT:CLIENT" ],
+          "dependencyEvents" : [ ]
+        }, {
+          "id" : "read-1",
+          "method" : "GET",
+          "path" : "/api/resources/r-1",
+          "wave" : 1,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "NOT_FOUND",
+            "resourceId" : null,
+            "version" : null,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "regression-stale-update",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "regression-stale-update",
+        "seed" : 42,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CREATED",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-1",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "order" : 1
+          } ]
+        }, {
+          "id" : "read-1",
+          "method" : "GET",
+          "path" : "/api/resources/r-1",
+          "wave" : 1,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        }, {
+          "id" : "update-1",
+          "method" : "POST",
+          "path" : "/api/resources/r-1/update",
+          "wave" : 2,
+          "dispatchIndex" : 2,
+          "completionIndex" : 2,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "STALE_VERSION",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        }, {
+          "id" : "read-2",
+          "method" : "GET",
+          "path" : "/api/resources/r-1",
+          "wave" : 3,
+          "dispatchIndex" : 4,
+          "completionIndex" : 4,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        }, {
+          "id" : "history-1",
+          "method" : "GET",
+          "path" : "/api/resources/r-1/history",
+          "wave" : 3,
+          "dispatchIndex" : 3,
+          "completionIndex" : 3,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : null,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  }, {
+    "name" : "stale-write",
+    "verdict" : "MATCH",
+    "runResult" : {
+      "success" : true,
+      "failureReason" : null,
+      "trace" : {
+        "scenario" : "stale-write",
+        "seed" : 7,
+        "requests" : [ {
+          "id" : "create-1",
+          "method" : "POST",
+          "path" : "/api/resources",
+          "wave" : 0,
+          "dispatchIndex" : 0,
+          "completionIndex" : 0,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "CREATED",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ {
+            "eventId" : "evt-1",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "order" : 1
+          } ]
+        }, {
+          "id" : "update-stale",
+          "method" : "POST",
+          "path" : "/api/resources/r-1/update",
+          "wave" : 1,
+          "dispatchIndex" : 1,
+          "completionIndex" : 1,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "STALE_VERSION",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        }, {
+          "id" : "read-1",
+          "method" : "GET",
+          "path" : "/api/resources/r-1",
+          "wave" : 2,
+          "dispatchIndex" : 2,
+          "completionIndex" : 2,
+          "attempts" : [ {
+            "attempt" : 1,
+            "code" : "OK",
+            "resourceId" : "r-1",
+            "version" : 1,
+            "replayed" : false
+          } ],
+          "faults" : [ ],
+          "dependencyEvents" : [ ]
+        } ]
+      },
+      "durationMs" : 0
+    },
+    "comparison" : {
+      "outcome" : "MATCH",
+      "diffs" : [ ]
+    },
+    "flaky" : false,
+    "minimalScenarioPath" : null
+  } ]
+}

@@ -1,0 +1,1 @@
+{"scenario":"fault-dep-latency","seed":8,"dependencyFaults":[{"request":"update-1","type":"LATENCY","delayMs":50,"afterRequest":null}]}

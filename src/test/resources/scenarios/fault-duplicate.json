@@ -1,0 +1,11 @@
+{
+  "name": "fault-duplicate",
+  "seed": 4,
+  "requests": [
+    {"id": "create-1", "method": "POST", "path": "/api/resources", "body": {"idempotencyKey": "k1", "data": {"v": 1}}},
+    {"id": "read-1", "method": "GET", "path": "/api/resources/r-1", "dependsOn": ["create-1"]}
+  ],
+  "faults": [
+    {"id": "f1", "type": "DUPLICATE_DELIVERY", "boundary": "CLIENT", "request": "create-1"}
+  ]
+}

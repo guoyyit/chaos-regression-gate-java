@@ -1,0 +1,1 @@
+{"scenario":"fault-failmidway","seed":6,"dependencyFaults":[{"request":"update-1","type":"FAIL_MIDWAY","delayMs":0,"afterRequest":null}]}

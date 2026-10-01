@@ -1,0 +1,12 @@
+{
+  "name": "fault-outoforder",
+  "seed": 5,
+  "requests": [
+    {"id": "create-1", "method": "POST", "path": "/api/resources", "body": {"data": {"v": 1}}},
+    {"id": "read-before", "method": "GET", "path": "/api/resources/r-1", "dependsOn": ["create-1"]},
+    {"id": "update-1", "method": "POST", "path": "/api/resources/r-1/update", "body": {"version": 1, "data": {"v": 2}}, "dependsOn": ["create-1"]}
+  ],
+  "faults": [
+    {"id": "f1", "type": "OUT_OF_ORDER", "boundary": "CLIENT", "request": "update-1", "after": "read-before"}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "fault-timeout",
+  "seed": 2,
+  "requests": [
+    {"id": "create-1", "method": "POST", "path": "/api/resources", "body": {"data": {"v": 1}}},
+    {"id": "read-1", "method": "GET", "path": "/api/resources/r-1", "dependsOn": ["create-1"]}
+  ],
+  "faults": [
+    {"id": "f1", "type": "TIMEOUT", "boundary": "CLIENT", "request": "create-1"}
+  ]
+}

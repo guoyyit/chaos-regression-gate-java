@@ -1,0 +1,42 @@
+{
+  "scenario" : "fault-latency",
+  "seed" : 1,
+  "requests" : [ {
+    "id" : "create-1",
+    "method" : "POST",
+    "path" : "/api/resources",
+    "wave" : 0,
+    "dispatchIndex" : 0,
+    "completionIndex" : 0,
+    "attempts" : [ {
+      "attempt" : 1,
+      "code" : "CREATED",
+      "resourceId" : "r-1",
+      "version" : 1,
+      "replayed" : false
+    } ],
+    "faults" : [ "LATENCY:CLIENT" ],
+    "dependencyEvents" : [ {
+      "eventId" : "evt-1",
+      "resourceId" : "r-1",
+      "version" : 1,
+      "order" : 1
+    } ]
+  }, {
+    "id" : "read-1",
+    "method" : "GET",
+    "path" : "/api/resources/r-1",
+    "wave" : 1,
+    "dispatchIndex" : 1,
+    "completionIndex" : 1,
+    "attempts" : [ {
+      "attempt" : 1,
+      "code" : "OK",
+      "resourceId" : "r-1",
+      "version" : 1,
+      "replayed" : false
+    } ],
+    "faults" : [ ],
+    "dependencyEvents" : [ ]
+  } ]
+}

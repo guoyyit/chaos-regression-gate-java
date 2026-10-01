@@ -1,0 +1,11 @@
+{
+  "name": "basic-crud",
+  "seed": 42,
+  "requests": [
+    {"id": "create-1", "method": "POST", "path": "/api/resources", "body": {"data": {"name": "foo"}}},
+    {"id": "read-1", "method": "GET", "path": "/api/resources/r-1", "dependsOn": ["create-1"]},
+    {"id": "update-1", "method": "POST", "path": "/api/resources/r-1/update", "body": {"version": 1, "data": {"name": "bar"}}, "dependsOn": ["read-1"]},
+    {"id": "read-2", "method": "GET", "path": "/api/resources/r-1", "dependsOn": ["update-1"]},
+    {"id": "history-1", "method": "GET", "path": "/api/resources/r-1/history", "dependsOn": ["update-1"]}
+  ]
+}

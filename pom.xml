@@ -46,6 +46,40 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>chaos-regression-gate</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.github.guoyyit.chaosregressiongatejava.gate.GateMain</mainClass>
+                            <classpathScope>test</classpathScope>
+                            <arguments>
+                                <argument>--scenarios</argument>
+                                <argument>${project.basedir}/gate/scenarios</argument>
+                                <argument>--baselines</argument>
+                                <argument>${project.basedir}/gate/baselines</argument>
+                                <argument>--output</argument>
+                                <argument>${project.basedir}/gate/reports</argument>
+                                <argument>--stability-runs</argument>
+                                <argument>2</argument>
+                                <argument>--flaky-policy</argument>
+                                <argument>FAIL</argument>
+                                <argument>--parallelism</argument>
+                                <argument>2</argument>
+                                <argument>--scenario-timeout</argument>
+                                <argument>60000</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

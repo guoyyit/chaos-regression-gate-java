@@ -1,0 +1,12 @@
+{
+  "name": "fault-failmidway",
+  "seed": 6,
+  "requests": [
+    {"id": "create-1", "method": "POST", "path": "/api/resources", "body": {"data": {"v": 1}}},
+    {"id": "update-1", "method": "POST", "path": "/api/resources/r-1/update", "body": {"version": 1, "data": {"v": 2}}, "dependsOn": ["create-1"]},
+    {"id": "read-1", "method": "GET", "path": "/api/resources/r-1", "dependsOn": ["update-1"]}
+  ],
+  "faults": [
+    {"id": "f1", "type": "FAIL_MIDWAY", "boundary": "DEPENDENCY", "request": "update-1"}
+  ]
+}

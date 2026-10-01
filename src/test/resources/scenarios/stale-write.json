@@ -1,0 +1,9 @@
+{
+  "name": "stale-write",
+  "seed": 7,
+  "requests": [
+    {"id": "create-1", "method": "POST", "path": "/api/resources", "body": {"data": {"v": 1}}},
+    {"id": "update-stale", "method": "POST", "path": "/api/resources/r-1/update", "body": {"version": 99, "data": {"v": 2}}, "dependsOn": ["create-1"]},
+    {"id": "read-1", "method": "GET", "path": "/api/resources/r-1", "dependsOn": ["update-stale"]}
+  ]
+}

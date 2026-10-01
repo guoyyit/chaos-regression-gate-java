@@ -1,0 +1,37 @@
+{
+  "scenario" : "fault-connreset",
+  "seed" : 3,
+  "requests" : [ {
+    "id" : "create-1",
+    "method" : "POST",
+    "path" : "/api/resources",
+    "wave" : 0,
+    "dispatchIndex" : 0,
+    "completionIndex" : 0,
+    "attempts" : [ {
+      "attempt" : 1,
+      "code" : "CONNECTION_FAILURE",
+      "resourceId" : null,
+      "version" : null,
+      "replayed" : false
+    } ],
+    "faults" : [ "CONNECTION_RESET:CLIENT" ],
+    "dependencyEvents" : [ ]
+  }, {
+    "id" : "read-1",
+    "method" : "GET",
+    "path" : "/api/resources/r-1",
+    "wave" : 1,
+    "dispatchIndex" : 1,
+    "completionIndex" : 1,
+    "attempts" : [ {
+      "attempt" : 1,
+      "code" : "NOT_FOUND",
+      "resourceId" : null,
+      "version" : null,
+      "replayed" : false
+    } ],
+    "faults" : [ ],
+    "dependencyEvents" : [ ]
+  } ]
+}

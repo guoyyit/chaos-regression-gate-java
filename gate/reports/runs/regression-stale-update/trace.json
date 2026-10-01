@@ -1,0 +1,90 @@
+{
+  "scenario" : "regression-stale-update",
+  "seed" : 42,
+  "requests" : [ {
+    "id" : "create-1",
+    "method" : "POST",
+    "path" : "/api/resources",
+    "wave" : 0,
+    "dispatchIndex" : 0,
+    "completionIndex" : 0,
+    "attempts" : [ {
+      "attempt" : 1,
+      "code" : "CREATED",
+      "resourceId" : "r-1",
+      "version" : 1,
+      "replayed" : false
+    } ],
+    "faults" : [ ],
+    "dependencyEvents" : [ {
+      "eventId" : "evt-1",
+      "resourceId" : "r-1",
+      "version" : 1,
+      "order" : 1
+    } ]
+  }, {
+    "id" : "read-1",
+    "method" : "GET",
+    "path" : "/api/resources/r-1",
+    "wave" : 1,
+    "dispatchIndex" : 1,
+    "completionIndex" : 1,
+    "attempts" : [ {
+      "attempt" : 1,
+      "code" : "OK",
+      "resourceId" : "r-1",
+      "version" : 1,
+      "replayed" : false
+    } ],
+    "faults" : [ ],
+    "dependencyEvents" : [ ]
+  }, {
+    "id" : "update-1",
+    "method" : "POST",
+    "path" : "/api/resources/r-1/update",
+    "wave" : 2,
+    "dispatchIndex" : 2,
+    "completionIndex" : 2,
+    "attempts" : [ {
+      "attempt" : 1,
+      "code" : "STALE_VERSION",
+      "resourceId" : "r-1",
+      "version" : 1,
+      "replayed" : false
+    } ],
+    "faults" : [ ],
+    "dependencyEvents" : [ ]
+  }, {
+    "id" : "read-2",
+    "method" : "GET",
+    "path" : "/api/resources/r-1",
+    "wave" : 3,
+    "dispatchIndex" : 4,
+    "completionIndex" : 4,
+    "attempts" : [ {
+      "attempt" : 1,
+      "code" : "OK",
+      "resourceId" : "r-1",
+      "version" : 1,
+      "replayed" : false
+    } ],
+    "faults" : [ ],
+    "dependencyEvents" : [ ]
+  }, {
+    "id" : "history-1",
+    "method" : "GET",
+    "path" : "/api/resources/r-1/history",
+    "wave" : 3,
+    "dispatchIndex" : 3,
+    "completionIndex" : 3,
+    "attempts" : [ {
+      "attempt" : 1,
+      "code" : "OK",
+      "resourceId" : "r-1",
+      "version" : null,
+      "replayed" : false
+    } ],
+    "faults" : [ ],
+    "dependencyEvents" : [ ]
+  } ]
+}
