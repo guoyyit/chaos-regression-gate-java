@@ -1,0 +1,15 @@
+{
+  "name": "fault-injection",
+  "seeds": [11],
+  "steps": [
+    {"id": "c1", "stream": "main", "method": "POST", "path": "/resources/dup-1", "body": "{\"data\":\"x\"}", "faults": [{"type": "DUPLICATE"}]},
+    {"id": "c2", "stream": "main", "method": "GET", "path": "/resources/dup-1"},
+    {"id": "c3", "stream": "main", "method": "GET", "path": "/resources/dup-1", "faults": [{"type": "TIMEOUT"}]},
+    {"id": "c4", "stream": "main", "method": "GET", "path": "/resources/dup-1", "faults": [{"type": "CONNECTION_RESET"}]},
+    {"id": "c5", "stream": "main", "method": "POST", "path": "/resources/dep-1", "body": "{\"data\":\"y\"}"},
+    {"id": "c6", "stream": "main", "method": "GET", "path": "/resources/dep-1"}
+  ],
+  "dependencyFaults": [
+    {"callIndex": 2, "type": "MIDWAY_FAILURE"}
+  ]
+}

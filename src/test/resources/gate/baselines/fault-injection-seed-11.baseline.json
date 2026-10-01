@@ -1,0 +1,99 @@
+{
+  "scenario" : "fault-injection",
+  "seed" : 11,
+  "entries" : [ {
+    "seq" : 0,
+    "stepId" : "__control",
+    "action" : "DEP_FAULTS_INSTALLED",
+    "request" : "POST /__control/faults",
+    "status" : 200,
+    "code" : null,
+    "body" : "{2=MIDWAY_FAILURE}",
+    "faultsApplied" : [ ],
+    "volatileFields" : { }
+  }, {
+    "seq" : 1,
+    "stepId" : "c1",
+    "action" : "RESPONSE",
+    "request" : "POST /resources/dup-1",
+    "status" : 201,
+    "code" : "CREATED",
+    "body" : "{\"code\":\"CREATED\",\"id\":\"dup-1\",\"version\":1,\"data\":\"x\",\"message\":null}",
+    "faultsApplied" : [ "DUPLICATE" ],
+    "volatileFields" : {
+      "virtualClock" : 1
+    }
+  }, {
+    "seq" : 2,
+    "stepId" : "c1",
+    "action" : "RESPONSE",
+    "request" : "POST /resources/dup-1#2",
+    "status" : 409,
+    "code" : "ALREADY_EXISTS",
+    "body" : "{\"code\":\"ALREADY_EXISTS\",\"id\":null,\"version\":null,\"data\":null,\"message\":\"resource already exists: dup-1\"}",
+    "faultsApplied" : [ "DUPLICATE" ],
+    "volatileFields" : {
+      "virtualClock" : 1
+    }
+  }, {
+    "seq" : 3,
+    "stepId" : "c2",
+    "action" : "RESPONSE",
+    "request" : "GET /resources/dup-1",
+    "status" : 200,
+    "code" : "OK",
+    "body" : "{\"code\":\"OK\",\"id\":\"dup-1\",\"version\":1,\"data\":\"x\",\"message\":null}",
+    "faultsApplied" : [ ],
+    "volatileFields" : {
+      "virtualClock" : 2
+    }
+  }, {
+    "seq" : 4,
+    "stepId" : "c3",
+    "action" : "RESPONSE",
+    "request" : "GET /resources/dup-1",
+    "status" : 598,
+    "code" : "CLIENT_TIMEOUT",
+    "body" : "{\"code\":\"CLIENT_TIMEOUT\"}",
+    "faultsApplied" : [ "TIMEOUT" ],
+    "volatileFields" : {
+      "virtualClock" : 3
+    }
+  }, {
+    "seq" : 5,
+    "stepId" : "c4",
+    "action" : "RESPONSE",
+    "request" : "GET /resources/dup-1",
+    "status" : 597,
+    "code" : "CONNECTION_RESET",
+    "body" : "{\"code\":\"CONNECTION_RESET\"}",
+    "faultsApplied" : [ "CONNECTION_RESET" ],
+    "volatileFields" : {
+      "virtualClock" : 4
+    }
+  }, {
+    "seq" : 6,
+    "stepId" : "c5",
+    "action" : "RESPONSE",
+    "request" : "POST /resources/dep-1",
+    "status" : 500,
+    "code" : "DEPENDENCY_FAILURE",
+    "body" : "{\"code\":\"DEPENDENCY_FAILURE\",\"id\":null,\"version\":null,\"data\":null,\"message\":\"injected mid-processing failure\"}",
+    "faultsApplied" : [ ],
+    "volatileFields" : {
+      "virtualClock" : 5
+    }
+  }, {
+    "seq" : 7,
+    "stepId" : "c6",
+    "action" : "RESPONSE",
+    "request" : "GET /resources/dep-1",
+    "status" : 200,
+    "code" : "OK",
+    "body" : "{\"code\":\"OK\",\"id\":\"dep-1\",\"version\":1,\"data\":\"y\",\"message\":null}",
+    "faultsApplied" : [ ],
+    "volatileFields" : {
+      "virtualClock" : 6
+    }
+  } ]
+}

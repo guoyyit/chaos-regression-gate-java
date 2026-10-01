@@ -1,0 +1,75 @@
+{
+  "scenario" : "basic-crud",
+  "seed" : 7,
+  "entries" : [ {
+    "seq" : 0,
+    "stepId" : "__control",
+    "action" : "DEP_FAULTS_INSTALLED",
+    "request" : "POST /__control/faults",
+    "status" : 200,
+    "code" : null,
+    "body" : "{}",
+    "faultsApplied" : [ ],
+    "volatileFields" : { }
+  }, {
+    "seq" : 1,
+    "stepId" : "s3",
+    "action" : "RESPONSE",
+    "request" : "PUT /resources/item-1",
+    "status" : 404,
+    "code" : "NOT_FOUND",
+    "body" : "{\"code\":\"NOT_FOUND\",\"id\":null,\"version\":null,\"data\":null,\"message\":\"resource not found: item-1\"}",
+    "faultsApplied" : [ "DELAY(3)" ],
+    "volatileFields" : {
+      "virtualClock" : 1
+    }
+  }, {
+    "seq" : 2,
+    "stepId" : "s1",
+    "action" : "RESPONSE",
+    "request" : "POST /resources/item-1",
+    "status" : 201,
+    "code" : "CREATED",
+    "body" : "{\"code\":\"CREATED\",\"id\":\"item-1\",\"version\":1,\"data\":\"v1\",\"message\":null}",
+    "faultsApplied" : [ ],
+    "volatileFields" : {
+      "virtualClock" : 2
+    }
+  }, {
+    "seq" : 3,
+    "stepId" : "s2",
+    "action" : "RESPONSE",
+    "request" : "PUT /resources/item-1",
+    "status" : 200,
+    "code" : "OK",
+    "body" : "{\"code\":\"OK\",\"id\":\"item-1\",\"version\":2,\"data\":\"v2\",\"message\":null}",
+    "faultsApplied" : [ ],
+    "volatileFields" : {
+      "virtualClock" : 3
+    }
+  }, {
+    "seq" : 4,
+    "stepId" : "s5",
+    "action" : "RESPONSE",
+    "request" : "GET /resources/item-1/history",
+    "status" : 200,
+    "code" : null,
+    "body" : "[{\"id\":\"item-1\",\"version\":1,\"data\":\"v1\"},{\"id\":\"item-1\",\"version\":2,\"data\":\"v2\"}]",
+    "faultsApplied" : [ ],
+    "volatileFields" : {
+      "virtualClock" : 4
+    }
+  }, {
+    "seq" : 5,
+    "stepId" : "s4",
+    "action" : "RESPONSE",
+    "request" : "GET /resources/item-1",
+    "status" : 200,
+    "code" : "OK",
+    "body" : "{\"code\":\"OK\",\"id\":\"item-1\",\"version\":2,\"data\":\"v2\",\"message\":null}",
+    "faultsApplied" : [ ],
+    "volatileFields" : {
+      "virtualClock" : 5
+    }
+  } ]
+}

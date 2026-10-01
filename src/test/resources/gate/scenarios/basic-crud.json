@@ -1,0 +1,12 @@
+{
+  "name": "basic-crud",
+  "seeds": [7, 42],
+  "steps": [
+    {"id": "s1", "stream": "a", "method": "POST", "path": "/resources/item-1", "body": "{\"data\":\"v1\"}"},
+    {"id": "s2", "stream": "a", "method": "PUT", "path": "/resources/item-1", "body": "{\"expectedVersion\":1,\"data\":\"v2\"}"},
+    {"id": "s3", "stream": "b", "method": "PUT", "path": "/resources/item-1", "body": "{\"expectedVersion\":1,\"data\":\"v3\"}", "faults": [{"type": "DELAY", "delayMs": 3}]},
+    {"id": "s4", "stream": "b", "method": "GET", "path": "/resources/item-1"},
+    {"id": "s5", "stream": "a", "method": "GET", "path": "/resources/item-1/history"}
+  ],
+  "dependencyFaults": []
+}
